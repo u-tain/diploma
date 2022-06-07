@@ -226,17 +226,7 @@ resnet_encoders = {
             'layers': [2, 2, 2, 2],
         },
     },
-
-    'resnet34': {
-        'encoder': ResNetEncoder,
-        'pretrained_settings': pretrained_settings['resnet34'],
-        'out_shapes': (512, 256, 128, 64, 64),
-        'params': {
-            'block': BasicBlock,
-            'layers': [3, 4, 6, 3],
-        },
-    },
-
+    
     'resnet50': {
         'encoder': ResNetEncoder,
         'pretrained_settings': pretrained_settings['resnet50'],
@@ -244,26 +234,6 @@ resnet_encoders = {
         'params': {
             'block': Bottleneck,
             'layers': [3, 4, 6, 3],
-        },
-    },
-
-    'resnet101': {
-        'encoder': ResNetEncoder,
-        'pretrained_settings': pretrained_settings['resnet101'],
-        'out_shapes': (2048, 1024, 512, 256, 64),
-        'params': {
-            'block': Bottleneck,
-            'layers': [3, 4, 23, 3],
-        },
-    },
-
-    'resnet152': {
-        'encoder': ResNetEncoder,
-        'pretrained_settings': pretrained_settings['resnet152'],
-        'out_shapes': (2048, 1024, 512, 256, 64),
-        'params': {
-            'block': Bottleneck,
-            'layers': [3, 8, 36, 3],
         },
     },
 }
@@ -302,27 +272,6 @@ def get_preprocessing_fn(encoder_name, pretrained='imagenet'):
 
 
 class Unet(EncoderDecoder):
-    """Unet_ is a fully convolution neural network for image semantic segmentation
-
-    Args:
-        encoder_name: name of classification model (without last dense layers) used as feature
-            extractor to build segmentation model.
-        encoder_weights: one of ``None`` (random initialization), ``imagenet`` (pre-training on ImageNet).
-        decoder_channels: list of numbers of ``Conv2D`` layer filters in decoder blocks
-        decoder_use_batchnorm: if ``True``, ``BatchNormalisation`` layer between ``Conv2D`` and ``Activation`` layers
-            is used.
-        classes: a number of classes for output (output shape - ``(batch, classes, h, w)``).
-        activation: activation function used in ``.predict(x)`` method for inference.
-            One of [``sigmoid``, ``softmax``, callable, None]
-        center: if ``True`` add ``Conv2dReLU`` block on encoder head (useful for VGG models)
-
-    Returns:
-        ``torch.nn.Module``: **Unet**
-
-    .. _Unet:
-        https://arxiv.org/pdf/1505.04597
-
-    """
 
     def __init__(
             self,
